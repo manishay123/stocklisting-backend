@@ -18,67 +18,86 @@ public class User {
   
     private long userId;
     @Column(name="FIRSTNAME")
-    private String FirstName;
+    private String firstName;
     @Column(name="LASTNAME")
-    private String LastName;
+    private String lastName;
     
     @Column(unique =true)
-    private String userName;
+    private String username;
     @Column(name="COUNTRY")
-	private String Country;
+	private String country;
     @Column(name="PASSWORD")
-	private String Password;
+	private String password;
     @Column(name="EMAILID")
 	private String emailId;
     @Column(name="PHONE")
-	private String Phone;
-  
-
-	
-	
-	
+	private String phone;
+	public long getUserId() {
+		return userId;
+	}
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.firstName = firstName;
 	}
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getCountry() {
-		return Country;
+		return country;
 	}
 	public void setCountry(String country) {
-		Country = country;
+		this.country = country;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password; 
 	}
-	public String getEmailId() {
+	public String getEmailId() { 
 		return emailId;
 	}
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
 	public String getPhone() {
-		return Phone;
+		return phone;
 	}
 	public void setPhone(String phone) {
-		Phone = phone;
+		this.phone = phone;
 	}
+	public User(long userId, String firstName, String lastName, String username, String country, String password,
+			String emailId, String phone) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.country = country;
+		this.password = password;
+		this.emailId = emailId;
+		this.phone = phone;
+	}
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+  
+
 	
 
 	

@@ -10,21 +10,22 @@ import com.stackroute.UserProfile.UserService.UserService;
 
 import java.util.List;
 //import io.swagger.v3.oas.annotations.Hidden;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserService userService; 
 
     
-
+ 
     @GetMapping("/getUser/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable Long userId) {
         User user = userService.getUserById(userId);
         return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
+    } 
+     
     @PostMapping("/register")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User user1 = userService.saveUser(user);

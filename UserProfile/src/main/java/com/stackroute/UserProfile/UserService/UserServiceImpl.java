@@ -2,18 +2,30 @@ package com.stackroute.UserProfile.UserService;
 
 import java.util.Optional;
 
+import org.apache.kafka.common.internals.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.stackroute.UserProfile.UserEntity.User;
 import com.stackroute.UserProfile.UserException.UserAlreadyExistException;
 import com.stackroute.UserProfile.UserException.UserNotFoundException;
 import com.stackroute.UserProfile.UserRepository.UserRepository;
+
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private Gson gson;
+    
+    @Autowired 
+    private KafkaTemplate<String, String> kafkaTemplate;
+     
+    private static final String TOPIC = "stockapp";
+	
 	@Override
 	public User getUserById(long userId) {
 		// TODO Auto-generated method stub
@@ -24,10 +36,14 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User saveUser(User user) {
 		// TODO Auto-generated method stub
-		if (userRepository.findByUserName(user.getUserName()).isPresent()) {
-            throw new UserAlreadyExistException("Username already exists: " + user.getUserName());
+		
+		if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            throw new UserAlreadyExistException("username already exists: " + user.getUsername());
         }
-		return userRepository.save(user);
+		   //String userJson = gson.toJson(user);
+		userRepository.save(user);
+		   kafkaTemplate.send(TOPIC, gson.toJson(user));
+		return user;
 	}
 
 	@Override
@@ -39,7 +55,7 @@ public class UserServiceImpl implements UserService{
 	            User existingUser = optionalUser.get();
 
 	            // Update the fields with the new values
-	            existingUser.setUserName(user.getUserName());
+	            existingUser.setUsername(user.getUsername());
 	            existingUser.setFirstName(user.getFirstName());
 	            existingUser.setLastName(user.getLastName());
 	            existingUser.setPhone(user.getPhone());

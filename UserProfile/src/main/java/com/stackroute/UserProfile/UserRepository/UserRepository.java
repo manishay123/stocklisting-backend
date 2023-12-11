@@ -8,6 +8,7 @@ import com.stackroute.UserProfile.UserEntity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByUserName(String userName);
+    Optional<User> findByUsername(String username);
     
 }
+ 
