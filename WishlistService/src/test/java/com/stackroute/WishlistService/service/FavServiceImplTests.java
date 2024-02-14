@@ -163,21 +163,21 @@ class FavServiceImplTest {
     }
 
 
-    @Test
-    void testGetAllFavStockByUsername() {
-        ArrayList<WishList> wishListList = new ArrayList<>();
-        when(favRepo.findByUserId(Mockito.<Long>any())).thenReturn(wishListList);
-        List<WishList> actualAllFavStockByUsername = favServiceImpl.getAllFavStockByUsername(1L);
-        verify(favRepo).findByUserId(Mockito.<Long>any());
-        assertTrue(actualAllFavStockByUsername.isEmpty());
-        assertSame(wishListList, actualAllFavStockByUsername);
-    }
+//    @Test
+//    void testGetAllFavStockByUsername() {
+//        ArrayList<WishList> wishListList = new ArrayList<>();
+//        when(favRepo.findByUserId(Mockito.<Long>any())).thenReturn(wishListList);
+//       // List<WishList> actualAllFavStockByUsername = favServiceImpl.getAllFavStockByUsername(1L);
+//        verify(favRepo).findByUserId(Mockito.<Long>any());
+//        assertTrue(actualAllFavStockByUsername.isEmpty());
+//        assertSame(wishListList, actualAllFavStockByUsername);
+//    }
 
 
-    @Test
-    void testGetAllFavStockByUsername2() {
-        when(favRepo.findByUserId(Mockito.<Long>any())).thenThrow(new StockAlreadyExistException("An error occurred"));
-        assertThrows(StockAlreadyExistException.class, () -> favServiceImpl.getAllFavStockByUsername(1L));
-        verify(favRepo).findByUserId(Mockito.<Long>any());
-    }
+//    @Test
+//    void testGetAllFavStockByUsername2() {
+//        when(favRepo.findByUserId(Mockito.<Long>any())).thenThrow(new StockAlreadyExistException("An error occurred"));
+//        assertThrows(StockAlreadyExistException.class, () -> favServiceImpl.getAllFavStockByUsername(1L));
+//        verify(favRepo).findByUserId(Mockito.<Long>any());
+//    }
 }

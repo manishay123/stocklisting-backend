@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import com.stackroute.UserProfile.UserEntity.User;
 import com.stackroute.UserProfile.UserService.UserService;
 
+
 import java.util.List;
 //import io.swagger.v3.oas.annotations.Hidden;
 
+@CrossOrigin()
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -20,10 +22,16 @@ public class UserController {
 
     
  
-    @GetMapping("/getUser/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        User user = userService.getUserById(userId);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    @GetMapping("/getUser")
+    public ResponseEntity<?> getAllUsers() {
+        List<User> user = userService.getAllUser();
+       
+
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No favorites found for user with ID: " );
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(user);
+        }
     } 
      
     @PostMapping("/register")
@@ -38,5 +46,8 @@ public class UserController {
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
-   
+    @GetMapping("/getUser/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+    	return new ResponseEntity<User>(userService.getUserById(userId), HttpStatus.OK);
+    }
 }

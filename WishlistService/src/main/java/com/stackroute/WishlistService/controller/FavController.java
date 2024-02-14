@@ -40,12 +40,12 @@ public class FavController {
 		return ResponseEntity.status(HttpStatus.OK).body(this.favServiceImpl.deleteStock(userId));
 	}
 	
-	@GetMapping("/view/{userId}")
-	public ResponseEntity<?> viewAllStock(@PathVariable Long userId) {
-        List<WishList> favorites = favServiceImpl.getAllFavStockByUsername(userId);
+	@GetMapping("/view")
+	public ResponseEntity<?> viewAllStock() {
+        List<WishList> favorites = favServiceImpl.getAll();
 
         if (favorites.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No favorites found for user with ID: " + userId);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No favorites found for user with ID: " );
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(favorites);
         }

@@ -1,5 +1,6 @@
 package com.stackroute.UserProfile.UserService;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.kafka.common.internals.Topic;
@@ -26,13 +27,7 @@ public class UserServiceImpl implements UserService{
      
     private static final String TOPIC = "stockapp";
 	
-	@Override
-	public User getUserById(long userId) {
-		// TODO Auto-generated method stub
-		 return userRepository.findById(userId)
-	                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + userId));
-	}
-
+	
 	@Override
 	public User saveUser(User user) {
 		// TODO Auto-generated method stub
@@ -42,7 +37,7 @@ public class UserServiceImpl implements UserService{
         }
 		   //String userJson = gson.toJson(user);
 		userRepository.save(user);
-		   kafkaTemplate.send(TOPIC, gson.toJson(user));
+		//   kafkaTemplate.send(TOPIC, gson.toJson(user));
 		return user;
 	}
 
@@ -68,6 +63,21 @@ public class UserServiceImpl implements UserService{
 	        } else {
 	            throw new UserNotFoundException("User not found with id: " + userId);
 	        }
+	}
+
+
+
+	@Override
+	public List<User> getAllUser() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
+	}
+
+	
+	@Override
+	public User getUserById(long userId) {
+		// TODO Auto-generated method stub
+		return userRepository.findById(userId).get();
 	}
 }
 	

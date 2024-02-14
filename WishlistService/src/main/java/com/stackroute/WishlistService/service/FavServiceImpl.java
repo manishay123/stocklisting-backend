@@ -44,11 +44,13 @@ public class FavServiceImpl implements FavService {
 			throw new StockNotFoundInWishListException("Stock not found");
 		}
 	}
+
+	@Override
+	public List<WishList> getAll() {
+		// TODO Auto-generated method stub
+		return favRepo.findAll();
+	}
     
 
-	 public List<WishList> getAllFavStockByUsername(Long userId) {
-	        return favRepo.findByUserId(userId);
-	    }
-	
 	
 	}

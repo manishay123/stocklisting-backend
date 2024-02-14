@@ -12,7 +12,7 @@ import com.stackroute.WishlistService.exception.StockNotFoundInWishListException
 
 public interface FavService {
  
-    List<WishList> getAllFavStockByUsername(Long userId);
+    List<WishList> getAll();
  
     WishList addStockToFavList(WishList newStock) throws StockAlreadyExistException;
     

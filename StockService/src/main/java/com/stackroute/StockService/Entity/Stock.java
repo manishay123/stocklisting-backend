@@ -1,16 +1,19 @@
 package com.stackroute.StockService.Entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
-@Data 
-@NoArgsConstructor 
-@AllArgsConstructor
-public class Stock {
 
-    private ArrayList<com.stackroute.StockService.Entity.Data> data = new ArrayList<>();
+@Setter
+@Getter
+@lombok.Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Stock {
+	private ArrayList<Data> data = new ArrayList<>() ;
 
 }
